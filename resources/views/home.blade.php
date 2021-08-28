@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-8">
                 <div class="d-flex justify-content-center flex-wrap">
-                    <a href="" class="my-2 mx-2 btn btn-outline-primary" style="width: 8rem">
+                    <a href="{{ route('diagnose') }}" class="my-2 mx-2 btn btn-outline-primary" style="width: 8rem">
                         <img src="{{ asset('images/icons/diagnose.png') }}" alt="diagnose.png" style="width: 36px"><br>
                         Diagnosa
                     </a>
