@@ -39,12 +39,32 @@ class HomeController extends Controller
             $diseases = Disease::withCount('diagnoses')->whereHas('diagnoses')->get();
             return view('admin.home', compact('stats','diseases'));
         }
-        return view('home');
+        $diagnoses = Diagnose::with(['disease','symptoms'])
+            ->orderBy('id','desc')
+            ->where('user_id', auth()->id())
+            ->limit(5)
+            ->get();
+        return view('home', compact('diagnoses'));
     }
 
     public function diagnose()
     {
         $symptoms = Symptom::orderBy('code')->get()->keyBy('code');
         return view('diagnose', compact('symptoms'));
+    }
+
+    public function history()
+    {
+        $diagnoses = Diagnose::with(['disease','symptoms'])
+            ->orderBy('id','desc')
+            ->where('user_id', auth()->id())
+            ->get();
+        return view('diagnose_history', compact('diagnoses'));
+    }
+
+    public function diseases_information()
+    {
+        $diseases = Disease::with('symptoms')->get();
+        return view('diseases', compact('diseases'));
     }
 }

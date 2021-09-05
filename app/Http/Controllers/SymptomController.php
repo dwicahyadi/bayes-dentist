@@ -46,6 +46,8 @@ class SymptomController extends Controller
 
     public function destroy(Symptom $symptom)
     {
+        if ($symptom->diseases->count())
+            return redirect(route('symptom.index'))->with('error', 'Gejala ' . $symptom->code . ' tidak dapat dihapus karena memiliki relasi dengan Penyakit!');
         $symptom->delete();
         return redirect(route('symptom.index'))->with('success', 'Gejala ' . $symptom->code . ' dihapus!');
     }

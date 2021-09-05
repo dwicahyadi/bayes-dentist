@@ -17,7 +17,11 @@ class DiagnoseController extends Controller
     }
     public function store(Request $request)
     {
-        $symptoms = Symptom::whereIn('id', $request['symptom_id'])->get();
+        $data = NaiveBayesService::predict($request['symptom_id']);
+
+        if (!$data)
+            return view('diagnose_failed');
+
         $diagnose = Diagnose::create([
             'user_id' => auth()->id(),
         ]);
@@ -29,10 +33,6 @@ class DiagnoseController extends Controller
         }
         $diagnose->symptoms()->sync($diagnose_symptom);
 
-        $data = NaiveBayesService::predict($request['symptom_id']);
-
-        if (!$data)
-            return redirect()->back()->with('error','Tidak ada kriteria yang terpenuhi');
 
         $diagnose->update(['disease_id' => $data['result']]);
 
@@ -43,6 +43,9 @@ class DiagnoseController extends Controller
     {
         $symptom_ids =  $diagnose->symptoms()->pluck('symptom_id')->toArray();
         $data = NaiveBayesService::predict($symptom_ids);
-        return view('diagnose_result',compact('diagnose','data'));
+        if (!auth()->user()->is_admin)
+            return view('diagnose_result',compact('diagnose','data'));
+
+        return view('admin.diagnose.show',compact('diagnose','data'));
     }
 }

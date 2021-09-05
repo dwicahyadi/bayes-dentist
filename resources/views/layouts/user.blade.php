@@ -38,15 +38,24 @@
                 {{ config('app.name', 'Laravel') }}
             </a>
             <a class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <img src="{{ auth()->user()->picture_url }}" alt="profile" class="rounded-circle" style="width: 24px">
+                <img src="{{ auth()->user()->picture_url ?? 'https://ui-avatars.com/api/?background=random&color=fff&name='.auth()->user()->name }}" alt="profile" class="rounded-circle" style="width: 24px">
             </a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item mx-2 @if(request()->is('*home')) bg-primary px-4 rounded-pill @endif">
                         <a class="nav-link text-light text-center " href="{{ route('home.user') }}"><i class="fa fa-dashboard"></i> Beranda</a>
                     </li>
-                    <li class="nav-item mx-2 @if(request()->is('diagnose')) bg-primary px-4 rounded-pill @endif">
+                    <li class="nav-item mx-2 @if(request()->is('diagnose*')) bg-primary px-4 rounded-pill @endif">
                         <a class="nav-link text-light text-center " href="{{ route('diagnose.create') }}"><i class="fa fa-stethoscope"></i> Diagnosa</a>
+                    </li>
+                    <li class="nav-item mx-2 @if(request()->is('history')) bg-primary px-4 rounded-pill @endif">
+                        <a class="nav-link text-light text-center " href="{{ route('history') }}"><i class="fa fa-history"></i> Riwayat</a>
+                    </li>
+                    <li class="nav-item mx-2 @if(request()->is('diseases_information')) bg-primary px-4 rounded-pill @endif">
+                        <a class="nav-link text-light text-center " href="{{ route('diseases_information') }}"><i class="fa fa-book"></i> Daftar Penyakit</a>
+                    </li>
+                    <li class="nav-item mx-2 @if(request()->is('profile')) bg-primary px-4 rounded-pill @endif">
+                        <a class="nav-link text-light text-center " href="{{ route('profile') }}"><i class="fa fa-user"></i> Profil</a>
                     </li>
                 </ul>
             </div>
@@ -98,11 +107,32 @@
     </main>
     <nav class="navbar navbar-expand-md navbar-light bg-white fixed-bottom border-top 	d-block  d-sm-none">
         <div class="container">
-            <nav class="nav nav-pills d-flex w-100 d-flex justify-content-around">
-                <a class="nav-item p-2 bg-info rounded-pill text-white" href="#"><i class="fa fa-dashboard"></i> Beranda</a>
-                <a class="nav-item p-2" href="#"><i class="fa fa-stethoscope"></i></a>
-                <a class="nav-item p-2" href="#"><i class="fa fa-history"></i></a>
-                <a class="nav-item p-2" href="#"><i class="fa fa-book"></i></a>
+            <nav class="nav nav-pills d-flex w-100 d-flex justify-content-around align-items-center">
+                <a class="nav-item @if(request()->is('*home')) p-2 bg-info rounded-pill text-white @endif" href="{{ route('home.user') }}">
+                    <i class="fa fa-dashboard mr-2"></i>
+                    @if(request()->is('*home')) Beranda @endif
+                </a>
+
+                <a class="nav-item @if(request()->is('diagnose*')) p-2 bg-info rounded-pill text-white @endif" href="{{ route('diagnose.create') }}">
+                    <i class="fa fa-stethoscope mr-2"></i>
+                    @if(request()->is('diagnose*')) Diagnosa @endif
+                </a>
+
+                <a class="nav-item @if(request()->is('history')) p-2 bg-info rounded-pill text-white @endif" href="{{ route('history') }}">
+                    <i class="fa fa-history mr-2"></i>
+                    @if(request()->is('history')) Riwayat @endif
+                </a>
+
+                <a class="nav-item @if(request()->is('diseases_information')) p-2 bg-info rounded-pill text-white @endif" href="{{ route('diseases_information') }}">
+                    <i class="fa fa-book mr-2"></i>
+                    @if(request()->is('diseases_information')) Daftar Penyakit @endif
+                </a>
+
+                <a class="nav-item @if(request()->is('profile')) p-2 bg-info rounded-pill text-white @endif" href="{{ route('profile') }}">
+                    <i class="fa fa-user mr-2"></i>
+                    @if(request()->is('profile')) Profil @endif
+                </a>
+
             </nav>
         </div>
     </nav>

@@ -12,12 +12,12 @@
                         <span class="card-title">Daftar Aturan</span>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <table class="table table-striped dataTable">
                             <thead>
                             <tr>
                                 <th>Penyakit</th>
                                 <th>Gejala</th>
-                                <th></th>
+                                <th>Aksi</th>
                             </tr>
                             </thead>
 

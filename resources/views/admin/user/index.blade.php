@@ -13,15 +13,15 @@
                         <a class="btn btn-primary" href="{{ route('user.create') }}">Tambah Pengguna Baru</a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <table class="table table-striped dataTable">
                             <thead>
                             <tr>
-                                <th></th>
+                                <th>Avatar</th>
                                 <th>Nama</th>
                                 <th>Nomor Teleppon</th>
                                 <th>Email</th>
                                 <th>Alamat</th>
-                                <th></th>
+                                <th>Aksi</th>
                             </tr>
                             </thead>
 
@@ -35,7 +35,7 @@
                                     <td>{{ $user->address }}</td>
                                     <td class="d-flex justify-content-end">
                                         <a class="btn btn-sm btn-info mx-2" href="{{ route('user.edit',['user'=>$user]) }}">Edit</a>
-                                        <form action="{{ route('user.destroy', $user) }}" method="post"  onsubmit="return confirm('Yakin hapus gejala ini?');">
+                                        <form action="{{ route('user.destroy', $user) }}" method="post"  onsubmit="return confirm('Yakin hapus user {{ $user->name }}?');">
                                             @method('DELETE')
                                             @csrf
                                             <button class="btn btn-sm btn-danger">Delete</button>

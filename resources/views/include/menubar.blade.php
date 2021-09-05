@@ -29,8 +29,8 @@
             <img src="{{ asset('images/icons/user.png') }}" style="width: 36px" alt=""><br>
             Pengguna</a>
     </li>
-    <li class="nav-item mx-2">
-        <a class="nav-link text-center" href="">
+    <li class="nav-item mx-2 @if(request()->is('admin/report*')) bg-info rounded shadow @endif">
+        <a class="nav-link text-center" href="{{ route('report') }}">
             <img src="{{ asset('images/icons/reports.png') }}" style="width: 36px" alt=""><br>
             Laporan</a>
     </li>

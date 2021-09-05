@@ -56,6 +56,7 @@ class NaiveBayesService
             if ($bayes > $temp_bayes){
                 $temp_bayes = $bayes;
                 $data['result'] = $hypothesis;
+                $data['bayes_final_value'] = $bayes;
             }
         }
         $data['P_CX'] = $class_prior;

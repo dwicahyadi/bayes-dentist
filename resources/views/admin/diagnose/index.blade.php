@@ -5,20 +5,20 @@
         <div class="row">
             <div class="col-md-12">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active">Penyakit</li>
+                    <li class="breadcrumb-item active">Hasil Diagnosa</li>
                 </ol>
                 <div class="card shadow-sm">
                     <div class="card-header bg-white d-flex justify-content-between">
                         <span class="card-title">Daftar Hasil Diagnosa</span>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <table class="table table-striped dataTable">
                             <thead>
                             <tr>
                                 <th>Tanggal/Waktu</th>
                                 <th>Pengguna</th>
                                 <th>Penyakit</th>
-                                <th></th>
+                                <th>Aksi</th>
                             </tr>
                             </thead>
 
@@ -28,7 +28,7 @@
                                     <td>{{ $diagnose->created_at }}</td>
                                     <td>{{ $diagnose->user->name }}</td>
                                     <td>{{ $diagnose->disease->name ?? 'kosong' }}</td>
-                                    <td>Tampilkan</td>
+                                    <td><a href="{{ route('diagnose.detail', $diagnose) }}" class="btn btn-primary">Tampilkan</a></td>
                                 </tr>
                             @empty
                                 <tr>

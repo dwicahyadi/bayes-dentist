@@ -13,12 +13,12 @@
                         <a class="btn btn-primary" href="{{ route('disease.create') }}">Tambah Penyakit Baru</a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <table class="table table-striped dataTable">
                             <thead>
                             <tr>
                                 <th>Penyakit</th>
                                 <th>Bobot</th>
-                                <th></th>
+                                <th>Aksi</th>
                             </tr>
                             </thead>
 

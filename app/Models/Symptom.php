@@ -10,4 +10,14 @@ class Symptom extends Model
     use HasFactory;
 
     protected $fillable = ['code', 'name'];
+
+    public function diseases()
+    {
+        return $this->belongsToMany(Disease::class);
+    }
+
+    public function diagnoses()
+    {
+        return $this->belongsToMany(Diagnose::class);
+    }
 }

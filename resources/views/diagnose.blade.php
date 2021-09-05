@@ -1,18 +1,26 @@
 @extends('layouts.user')
 
 @section('content')
+    <div class="bg-info">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8" style="background-image: url(../images/icons/diagnose.png);
+            background-position: right center;
+            background-repeat: no-repeat;
+            background-size: 128px 128px;
+            ">
+                    <div class="d-flex align-items-center justify-content-center" style="height: 10em">
+                        <h1 class="text-white">Diagnosa</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
 
 
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="text-center mt-4">
-                    <img class="img-fluid w-25" src="{{ asset('images/icons/diagnose.png') }}" alt="chair.png">
-                </div>
-                <h3 class="text-primary mt-4">Diagnosa Penyakit Gigi</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolorum iste nisi quia quo quod voluptate? Aperiam nisi nobis, omnis quis sequi ullam vitae? Earum ex fuga officiis quam similique!</p>
-            </div>
-            <div class="col-md-8">
+            <div class="col-md-8 mt-4">
                 <strong class="mt-4 text-primary">Tandai gejala yang kamu alami</strong>
                 <form action="{{ route('diagnose.store') }}" method="post">
                     @csrf

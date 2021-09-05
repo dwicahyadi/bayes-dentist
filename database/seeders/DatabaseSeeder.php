@@ -16,10 +16,19 @@ class DatabaseSeeder extends Seeder
     {
          \App\Models\User::create([
              'name'=>'Superadmin',
-             'phone'=>'087779537772',
+             'phone'=>'0800000000',
+             'email'=>'admin@admin.com',
              'password'=>Hash::make('password'),
              'is_admin' => true,
              ]);
+
+        \App\Models\User::create([
+            'name'=>'Jhon Doe',
+            'phone'=>'08123123123',
+            'email'=>'jhon@user.com',
+            'password'=>Hash::make('password'),
+            'is_admin' => false,
+        ]);
 
          $this->call(SymptopSeeder::class);
          $this->call(DiseaseSeeder::class);

@@ -51,11 +51,16 @@ class DiseaseController extends Controller
             'advice' => $request['advice'],
         ]);
 
-        return redirect(route('disease.index'))->with('success', 'Penyakit '.$disease->name.' ditambahkan!');
+        return redirect(route('disease.index'))->with('success', 'Penyakit '.$disease->name.' diperbaharui!');
     }
 
     public function destroy(Disease $disease)
     {
+        if ($disease->symptoms->count())
+            return redirect(route('disease.index'))->with('error', 'Penyakit '.$disease->name.' tidak dapat dihapuskarena memiliki relasi dengan beberapa Gejala!');
+
+        if ($disease->diagnoses->count())
+            return redirect(route('disease.index'))->with('error', 'Penyakit '.$disease->name.' tidak dapat dihapuskarena memiliki relasi dengan beberapa Hasil Diagnosa!');
         $disease->delete();
         return redirect(route('disease.index'))->with('success', 'Penyakit '.$disease->name.' dihapus!');
     }

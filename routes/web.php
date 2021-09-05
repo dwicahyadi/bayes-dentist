@@ -24,6 +24,11 @@ Route::group(['middleware'=>'auth',], function (){
     Route::get('diagnose', [App\Http\Controllers\HomeController::class, 'diagnose'])->name('diagnose.create');
     Route::post('diagnose', [App\Http\Controllers\DiagnoseController::class, 'store'])->name('diagnose.store');
     Route::get('diagnose/{diagnose}', [App\Http\Controllers\DiagnoseController::class, 'show'])->name('diagnose.show');
+    Route::get('history', [App\Http\Controllers\HomeController::class, 'history'])->name('history');
+    Route::get('diseases_information', [App\Http\Controllers\HomeController::class, 'diseases_information'])->name('diseases_information');
+    Route::get('profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+    Route::put('profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    Route::put('profile/password', [App\Http\Controllers\ProfileController::class, 'update_password'])->name('profile.update_password');
 
     Route::group(['middleware'=>'isAdmin', 'prefix'=>'admin/'], function (){
         Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -34,6 +39,8 @@ Route::group(['middleware'=>'auth',], function (){
         Route::get('rule/{disease_id}/edit',[\App\Http\Controllers\RuleController::class, 'edit'])->name('rule.edit');
         Route::put('rule/{disease_id}/',[\App\Http\Controllers\RuleController::class, 'update'])->name('rule.update');
         Route::get('diagnose',[\App\Http\Controllers\DiagnoseController::class,'index'])->name('diagnose.index');
+        Route::get('diagnose/{diagnose}', [App\Http\Controllers\DiagnoseController::class, 'show'])->name('diagnose.detail');
+        Route::get('report',[\App\Http\Controllers\ReportController::class,'index'])->name('report');
     });
 });
 
