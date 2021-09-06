@@ -51,7 +51,7 @@
                                 <div>
                                     <span>{{ $diagnose->created_at }}</span><br>
                                     <strong>{{ $diagnose->disease->name ?? 'Tidak tahu' }}</strong><br>
-                                    <small>@forelse($diagnose->symptoms as $symptom) {{ $symptom->name }}, @endforeach </small>
+                                    <small>@foreach($diagnose->symptoms as $symptom) {{ $symptom->name }}, @endforeach </small>
                                 </div>
 
                             </div>
