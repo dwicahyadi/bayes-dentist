@@ -37,8 +37,17 @@ class ProfileController extends Controller
 
         $user = auth()->user();
 
-        $user->update(['password' => Hash::make($request['password'])]);
+        $old_password = $user->getAuthPassword();
 
-        return redirect(route('profile'))->with('success','Berhasil memperbarui password!');
+        if(Hash::check($request['old_password'], $old_password))
+        {
+            $user->update(['password' => Hash::make($request['password'])]);
+
+            return redirect(route('profile'))->with('success','Berhasil memperbarui password!');
+        }else{
+            return redirect(route('profile'))->with('error','Gagal memperbarui password! Periksa password lama'. $old_password);
+        }
+
+
     }
 }

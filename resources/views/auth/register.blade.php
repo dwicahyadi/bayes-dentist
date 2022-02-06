@@ -81,7 +81,7 @@ background-size: cover">
 
 
                             <div class="form-group">
-                                <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Nomor Handphone">
+                                <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" placeholder="Nomor Handphone" maxlength="15" minlength="10">
 
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
@@ -104,6 +104,8 @@ background-size: cover">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Konfirmasi Password">
                             </div>
 
+                            <label class="mt-2"><input type="checkbox" onclick="togglePW()"> Tampilkan password</label>
+
                             <div class="form-group mb-0">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-lg rounded-pill btn-block">
@@ -120,5 +122,23 @@ background-size: cover">
 
     </main>
 </div>
+
+<script>
+    function togglePW() {
+      var x = document.getElementById("password");
+      var y = document.getElementById("password-confirm");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+
+      if (y.type === "password") {
+        y.type = "text";
+      } else {
+        y.type = "password";
+      }
+    }
+</script>
 </body>
 </html>

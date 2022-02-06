@@ -63,4 +63,9 @@ class NaiveBayesService
 
         return $data;
     }
+
+    public static function train(array $symptoms, $disesase)
+    {
+
+    }
 }

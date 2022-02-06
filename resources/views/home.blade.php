@@ -25,7 +25,7 @@
                             Penyakit Gigi
                         </a>
 
-                        <a href="" class="my-2 mx-2 btn btn-outline-light" style="width: 8rem">
+                        <a href="{{ route('profile') }}" class="my-2 mx-2 btn btn-outline-light" style="width: 8rem">
                             <img src="{{ asset('images/icons/user.png') }}" alt="diagnose.png" style="width: 36px"><br>
                             Profile
                         </a>

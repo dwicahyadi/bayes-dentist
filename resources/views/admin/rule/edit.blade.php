@@ -56,7 +56,7 @@
                                                    max="1">
                                         </td>
                                         <td>
-                                            <a href='#' class='delete-row btn btn-sm btn-outline-danger'><i class="fa fa-trash"></i></a>
+                                            <a href='#' class='delete-row btn btn-sm btn-outline-danger' data-code="{{ $symptom->code }}"><i class="fa fa-trash"></i></a>
                                             <input type="hidden" name="symptom_id[]" value="{{ $symptom->id }}">
                                         </td>
                                     </tr>
@@ -81,6 +81,9 @@
 @section('script')
     <script>
         var symptoms = $.parseJSON('{!! $symptoms !!}')
+        var symptoms_exists = $.parseJSON('{!! $disease->symptoms->keyBy('code') !!}')
+
+        console.log(symptoms_exists)
 
 
         $(".add-row").click(function () {
@@ -91,20 +94,39 @@
             }
 
             var symptom = symptoms[code];
+
+            if(symptom == null) {
+                alert('Kode Gejala tidak ditemukan. Silakan periksa kembali');
+                return false
+            }
+
+            if(typeof symptoms_exists[code] != 'undefined') {
+                alert('Kode Gejala sudah ada di dalam daftar!');
+                return false
+            }
+
+
+            symptoms_exists[code] = symptom;
+
+
             var markup = "<tr>" +
-                "<td>" + symptom.code + "</td>" +
-                "<td>" + symptom.name + "</td>" +
+                "<td class='text-success'>" + symptom.code + "</td>" +
+                "<td class='text-success'>" + symptom.name + "</td>" +
                 "<td><input type='number' name='value[]' class='form-control' step='0.01' value='0' max='1'></td>" +
-                "<td><a href='#' class='delete-row btn btn-sm btn-outline-danger'><i class='fa fa-trash'></i></a><input type='hidden' name='symptom_id[]' value='" + symptom.id + "'></td>" +
+                "<td><a href='#' class='delete-row btn btn-sm btn-outline-danger' data-code='" + symptom.code + "'>" +
+                "<i class='fa fa-trash'></i></a><input type='hidden' name='symptom_id[]' value='" + symptom.id + "'></td>" +
                 "</tr>";
-            $("table tbody").append(markup);
+            $("table tbody").prepend(markup);
             $("#new_symptom").val('')
         });
 
         $("table").on('click', '.delete-row', function () {
-            var conf = confirm('Yakin hapus gejala ini ?')
-            if (conf)
+            var conf = confirm('Yakin hapus gejala ' + $(this).data('code') + '?')
+            if (conf) {
                 $(this).parent().parent().remove();
+                delete symptoms_exists[$(this).data('code')];
+            }
+
         });
 
 

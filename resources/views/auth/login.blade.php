@@ -88,6 +88,8 @@ background-color: cornflowerblue ">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
+                                <label class="mt-2"><input type="checkbox" onclick="togglePW()"> Tampilkan password</label>
                             </div>
 
                             <div class="form-group">
@@ -114,5 +116,16 @@ background-color: cornflowerblue ">
 
     </main>
 </div>
+
+<script>
+    function togglePW() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+</script>
 </body>
 </html>

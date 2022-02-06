@@ -66,7 +66,7 @@ background-color: cornflowerblue ">
                 </div>
                 <div class="col-md-6">
                     <div class="jumbotron bg-transparent text-white">
-                        <h1 class="h1 my-4">Bayes Dentist</h1>
+                        <h1 class="h1 my-4">HALO</h1>
                         <p class="card-subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi architecto aspernatur aut, delectus eius esse expedita ipsam laboriosam minima necessitatibus nesciunt omnis optio, perspiciatis placeat qui, quia saepe vitae.</p>
                         <a href="{{ route('diagnose.create') }}" class="mt-4 btn btn-lg btn-outline-light rounded-pill">Diagnosa Sekarang</a>
                     </div>

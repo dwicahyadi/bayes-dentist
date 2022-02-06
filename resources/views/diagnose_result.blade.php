@@ -12,7 +12,7 @@
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <h5 class="mt-4 text-white">Berdasarkan gejala dan prediksi kamu mengalami :</h5>
                         <h1 class="h1 text-white">{{ $diagnose->disease->name }}</h1>
-                        <small class="text-muted">Nilai Bayes : {{ $data['bayes_final_value'] }}</small>
+                        <small class="text-muted">Nilai Bayes : {{ number_format($data['bayes_final_value'] *100, 3) }}%</small>
                         <div class="mt-4">
                             <a href="{{ route('diagnose.create') }}" class="btn btn-outline-light rounded-pill">Diagnosa Baru</a>
                             <a href="{{ route('history') }}" class="btn btn-outline-light rounded-pill">Riwayat Diagnosa</a>
@@ -87,7 +87,16 @@
 
                         <div class="tab-pane" id="information" role="tabpanel" aria-labelledby="information-tab">
                             <h5 class="mt-4">Informasi</h5>
+                            <h4>{{ $diagnose->disease->name }}</h4>
                             <p>{{ $diagnose->disease->description ?? 'Informasi belum di input' }}</p>
+                            <hr>
+                            <strong class="mt-2 mb-2">Penyakit Terkait</strong>
+                            @forelse($related_diseases as $related_disease)
+                                <h5 class="mt-2">{{ $related_disease->name }}</h5>
+                                <p>{{ $related_disease->description ?? 'Informasi belum di input' }}</p>
+                            @empty
+                                <p>Tidak ada penyakit terkait</p>
+                            @endforelse
                         </div>
                         <div class="tab-pane" id="advice" role="tabpanel" aria-labelledby="advice-tab">
                             <h5 class="mt-4">Saran/Pengobatan</h5>

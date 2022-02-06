@@ -43,8 +43,16 @@ class DiagnoseController extends Controller
     {
         $symptom_ids =  $diagnose->symptoms()->pluck('symptom_id')->toArray();
         $data = NaiveBayesService::predict($symptom_ids);
+
+        $related_diseases = [];
+        foreach ($data['P_CX'] as $id => $val) {
+            if($id == $data['result'])
+                continue;
+            $related_diseases[] = Disease::find($id);
+        }
+
         if (!auth()->user()->is_admin)
-            return view('diagnose_result',compact('diagnose','data'));
+            return view('diagnose_result',compact('diagnose','data', 'related_diseases'));
 
         return view('admin.diagnose.show',compact('diagnose','data'));
     }

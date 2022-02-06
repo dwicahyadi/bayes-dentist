@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -65,12 +66,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
 //            'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
             'picture_url' => 'https://ui-avatars.com/api/?background=random&color=fff&name='.$data['name']
         ]);
+
+        $msg = "Selamat datang\n\n";
+        $msg .= "Terimakasih sudah melakukan registrasi di sistem kami.";
+
+        Http::post('https://console.zenziva.net/wareguler/api/sendWA/', [
+            'userkey' => '60fa891ad669',
+            'passkey' => '612c1b193ed11cb91bff986d',
+            'to' => $user->phone,
+            'message' => $msg
+        ]);
+        return $user;
     }
 }
